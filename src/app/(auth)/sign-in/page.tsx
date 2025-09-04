@@ -1,3 +1,4 @@
+05-auth-socials
 import { SignInView } from "@/modules/auth/ui/views/sign-in-view";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -20,3 +21,4 @@ const page = async () => {
 }
 
 export default page;
+

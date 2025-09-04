@@ -4,8 +4,9 @@ import { set, z } from "zod";
 import Link from "next/link";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { OctagonAlertIcon } from "lucide-react";
+import { OctagonAlertIcon } from "lucide-react"; 05-auth-socials
 import { FaGithub , FaGoogle } from "react-icons/fa";
+
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
@@ -24,7 +25,7 @@ import {
 
 import { Card, CardContent } from "@/components/ui/card";
 import { se } from "date-fns/locale";
-import { on } from "events";
+
 
 const formSchema = z.object({
   email: z.string().email({message: "Invalid email"}),
@@ -80,6 +81,7 @@ export const SignInView = () => {
     {
         onSuccess : () => {
           setPending(false);
+            router.push("/");
       },
         onError : ({ error }) => {
             setError(error.message);
@@ -87,6 +89,7 @@ export const SignInView = () => {
      }
    ); 
  };
+
 
   return (
     <div className="flex flex-col gap-6">
@@ -144,14 +147,13 @@ export const SignInView = () => {
                     <AlertTitle>{ error }</AlertTitle>
                   </Alert>
                 )}
-                <Button
+                <button
                   disabled={pending}
                   type="submit"
                   className="w-full bg-black text-white hover:bg-white hover:text-black border border-black transition-colors duration-300 px-4 py-2 rounded-md text-lg font-medium"
                 >
                   Sign in
                 </Button>
-
                 {/* Fixed divider */}
                 <div className="relative flex items-center">
                   <div className="flex-grow border-t border-gray-300"></div>
@@ -211,3 +213,4 @@ export const SignInView = () => {
     </div>
   );
 };
+

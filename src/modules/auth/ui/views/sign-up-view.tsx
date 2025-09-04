@@ -8,6 +8,7 @@ import { OctagonAlertIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FaGithub , FaGoogle } from "react-icons/fa";
 
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
@@ -38,7 +39,6 @@ const formSchema = z.object({
 
 export const SignUpView = () => {
   const router = useRouter();
-
   const[error , setError] = useState<string | null>(null);
   const[pending , setPending] = useState(false);  
   
@@ -64,7 +64,9 @@ export const SignUpView = () => {
         email : data.email,
         password : data.password,
 
+
         callbackURL: "/", 
+
     }, 
     {
         onSuccess : () => {
@@ -78,6 +80,7 @@ export const SignUpView = () => {
    ); 
  };
   
+
   const onSocial = (provider: "github" | "google")  => {
    setError(null);
    setPending(true);
@@ -259,6 +262,6 @@ export const SignUpView = () => {
       </div>
     </div>
   );
-};
 
+};
 
