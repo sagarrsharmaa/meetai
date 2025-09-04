@@ -11,6 +11,7 @@ const session = await auth.api.getSession({
   redirect("/sign-in");
   }
 
+ 05-auth-socials
   return <HomeView />
 };
 export default page;
