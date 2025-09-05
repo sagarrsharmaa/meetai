@@ -194,7 +194,7 @@ export const SignInView = () => {
             </form>
           </Form>
 
-          <div className="bg-gradient-to-br from-green-500 to-green-800 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+          <div className="bg-gradient-to-br from-[#1a2e1a] to-green-900 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <img
               src="/logo.svg"
               alt="Image"
