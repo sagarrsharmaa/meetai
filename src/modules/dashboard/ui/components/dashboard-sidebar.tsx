@@ -91,7 +91,16 @@ SidebarMenu,
 SidebarMenuItem,
 SidebarMenuButton
 } from "@/components/ui/sidebar";
-import { DashboardUserButton } from "@/modules/dashboard/ui/dashboard-user-button";
+import{
+   Drawer,
+   DrawerContent,
+   DrawerDescription,
+   DrawerFooter,
+   DrawerTitle,
+   DrawerHeader,
+   DrawerTrigger
+} from "@/components/ui/drawer"
+import { DashboardUserButton } from "@/modules/dashboard/ui/components/dashboard-user-button";
 import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
