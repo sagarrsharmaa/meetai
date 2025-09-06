@@ -14,3 +14,4 @@ const session = await auth.api.getSession({
   return <HomeView />
 };
 export default page;
+ 
