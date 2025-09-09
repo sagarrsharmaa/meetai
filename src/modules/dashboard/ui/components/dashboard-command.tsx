@@ -21,7 +21,7 @@
 //         </CommandDialog>
 //     )
 // }
-import { CommandDialog, CommandInput , CommandList , CommandItem} from "@/components/ui/command";
+import { CommandResponsiveDialog, CommandInput , CommandList , CommandItem} from "@/components/ui/command";
 import { Dispatch, SetStateAction } from "react";
 
 
@@ -32,7 +32,7 @@ interface Props {
 
 export const DashboardCommand = ({open , setOpen}: Props) => {
     return(
-        <CommandDialog 
+        <CommandResponsiveDialog
             open={open} 
             onOpenChange={setOpen}
             className="bg-white/20 backdrop-blur-sm"
@@ -45,6 +45,6 @@ export const DashboardCommand = ({open , setOpen}: Props) => {
                     Test
                 </CommandItem>
             </CommandList>
-        </CommandDialog>
+        </CommandResponsiveDialog>
     )
 }
