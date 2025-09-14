@@ -97,7 +97,7 @@ initialValues
                 <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                    <Input {...field}  placeholder="e.g. Your Virtual Daddy"/>
+                    <Input {...field}  placeholder="e.g. Your Math Tutor"/>
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -111,7 +111,7 @@ initialValues
                 <FormItem>
                     <FormLabel>Instructions</FormLabel>
                     <FormControl>
-                        <Textarea {...field}  placeholder="this is your virtual daddy that can remove your loneliness"/>
+                        <Textarea {...field}  placeholder="describe the suitable work for your agent"/>
                     </FormControl>
                     <FormMessage />
                 </FormItem>
