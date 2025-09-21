@@ -46,6 +46,25 @@ initialValues
                 queryClient.invalidateQueries(
                     trpc.agents.getMany.queryOptions({}),
                 );
+
+                // TODO : invalidate free tier usage in future
+                onSuccess?.();                
+            },
+            onError: (error) => {
+                toast.error(error.message);
+                //TODO : CHECK IF ERROR CODE IS "FORBIDDEN" , REDIRECT TO /UPDATE
+                
+            },
+        }), 
+    );
+
+
+    const UpdateAgent = useMutation(
+       trpc.agents.update.mutationOptions({
+            onSuccess: () => {
+                queryClient.invalidateQueries(
+                    trpc.agents.getMany.queryOptions({}),
+                );
                 if(initialValues ?.id) {
                     queryClient.invalidateQueries(
                         trpc.agents.getOne.queryOptions({id : initialValues.id}),
@@ -71,11 +90,13 @@ initialValues
      });
            
     const isEdit = !!initialValues?.id;
-    const isPending = createAgent.isPending;
+    const isPending = createAgent.isPending || UpdateAgent.isPending;
       
     const onSubmit = (values : z.infer<typeof agentsInsertSchema>) => {
         if(isEdit){
-            console.log("TODO : UpdateAgent")
+            UpdateAgent.mutate({
+              ...values , id : initialValues.id  
+            });
         } else {
             createAgent.mutate(values);
         }
