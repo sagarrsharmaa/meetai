@@ -1,7 +1,8 @@
  
 "use client";
-import { set, z } from "zod";
+import { z } from "zod";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OctagonAlertIcon } from "lucide-react";
@@ -23,7 +24,6 @@ import {
 } from "@/components/ui/form";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { se } from "date-fns/locale";
 
 const formSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -196,18 +196,17 @@ export const SignUpView = () => {
                 <button
                   disabled={pending}
                   type="submit"
-                  className="w-full bg-black text-white hover:bg-white hover:text-black border border-black transition-colors duration-300 px-4 py-2 rounded-md text-lg font-medium"
+                  className="w-full"
                 >
                   Sign in
                 </button>
 
-                {/* Fixed divider */}
                 <div className="relative flex items-center">
-                  <div className="flex-grow border-t border-gray-300"></div>
-                  <span className="mx-4 text-muted-foreground text-sm">
+                  <div className="flex-grow border-t border-border" />
+                  <span className="mx-4 text-sm text-muted-foreground">
                     Or continue with
                   </span>
-                  <div className="flex-grow border-t border-gray-300"></div>
+                  <div className="flex-grow border-t border-border" />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -243,12 +242,8 @@ export const SignUpView = () => {
             </form>
           </Form>
 
-          <div className="bg-gradient-to-br from-[#1a2e1a] to-green-900 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-            <img
-              src="/logo.svg"
-              alt="Image"
-              className="h-[92px] w-[92px]"
-            />
+          <div className="relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-sidebar-accent to-sidebar md:flex">
+            <Image src="/logo.svg" alt="Meet.AI" width={92} height={92} />
             <p className="text-2xl font-semibold text-white">Meet.AI</p>
           </div>
         </CardContent>
@@ -260,5 +255,4 @@ export const SignUpView = () => {
     </div>
   );
 };
-
 
