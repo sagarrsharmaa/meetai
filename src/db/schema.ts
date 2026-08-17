@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 
 
-import { pgTable, text, timestamp, boolean, PgUpdateBuilder, pgEnum,} from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, pgEnum,} from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
  id: text('id').primaryKey(),
@@ -96,5 +96,4 @@ export const meetings = pgTable("meetings" , {
      updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
                                 
-
 
