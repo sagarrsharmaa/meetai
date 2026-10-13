@@ -2,17 +2,17 @@
 
 
 
-import { MeetingsListHeader } from "@/modules/meetings/ui/components/meetings-list-header";
-import { MeetingsView, MeetingsViewError, MeetingsViewLoading } from "@/modules/meetings/ui/views/meetings-view";
+import { MeetingsListHeader } from "@/frontend/modules/meetings/ui/components/meetings-list-header";
+import { MeetingsView, MeetingsViewError, MeetingsViewLoading } from "@/frontend/modules/meetings/ui/views/meetings-view";
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate , HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
+import { auth } from "@/backend/lib/auth";
 import type { SearchParams } from "nuqs";
-import { loadSearchParams } from "@/modules/meetings/params";
+import { loadSearchParams } from "@/frontend/modules/meetings/params";
 
 
 interface Props {

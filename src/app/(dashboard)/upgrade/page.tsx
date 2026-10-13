@@ -4,13 +4,13 @@ import { redirect } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import { auth } from "@/lib/auth";
+import { auth } from "@/backend/lib/auth";
 import { getQueryClient, trpc } from "@/trpc/server";
 import {
   UpgradeView,
   UpgradeViewError,
   UpgradeViewLoading,
-} from "@/modules/premium/ui/views/upgrade-view";
+} from "@/frontend/modules/premium/ui/views/upgrade-view";
 
 const Page = async () => {
   const session = await auth.api.getSession({ headers: await headers() });

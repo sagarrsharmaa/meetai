@@ -10,12 +10,12 @@ import type {
   MessageNewEvent,
 } from "@stream-io/node-sdk";
 
-import { db } from "@/db";
-import { agents, meetings } from "@/db/schema";
-import { inngest } from "@/inngest/client";
-import { getStreamVideo } from "@/lib/stream-video";
-import { getStreamChat } from "@/lib/stream-chat";
-import { generateAvatarUri } from "@/lib/avatar";
+import { db } from "@/backend/db";
+import { agents, meetings } from "@/backend/db/schema";
+import { inngest } from "@/backend/inngest/client";
+import { getStreamVideo } from "@/backend/lib/stream-video";
+import { getStreamChat } from "@/backend/lib/stream-chat";
+import { generateAvatarUri } from "@/frontend/lib/avatar";
 
 const verifySignatureWithSDK = (body: string, signature: string): boolean => {
   return getStreamVideo().verifyWebhook(body, signature);

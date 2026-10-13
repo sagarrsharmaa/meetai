@@ -1,14 +1,14 @@
-import { AgentsView, AgentsViewError, AgentsViewLoading , } from "@/modules/agents/ui/views/agents-view";
+import { AgentsView, AgentsViewError, AgentsViewLoading , } from "@/frontend/modules/agents/ui/views/agents-view";
 import { getQueryClient  , trpc} from "@/trpc/server";
 import { HydrationBoundary , dehydrate} from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
-import { AgentsListHeader } from "@/modules/agents/ui/components/agents-list-header";
-import { auth } from "@/lib/auth";
+import { AgentsListHeader } from "@/frontend/modules/agents/ui/components/agents-list-header";
+import { auth } from "@/backend/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import type { SearchParams } from "nuqs";
-import { loadSearchParams } from "@/modules/agents/params";
+import { loadSearchParams } from "@/frontend/modules/agents/params";
 
 
 

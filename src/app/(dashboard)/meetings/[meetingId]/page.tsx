@@ -4,13 +4,13 @@ import { redirect } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import { auth } from "@/lib/auth";
+import { auth } from "@/backend/lib/auth";
 import { getQueryClient, trpc } from "@/trpc/server";
 import {
   MeetingIdView,
   MeetingIdViewError,
   MeetingIdViewLoading,
-} from "@/modules/meetings/ui/views/meeting-id-view";
+} from "@/frontend/modules/meetings/ui/views/meeting-id-view";
 
 interface Props {
   params: Promise<{ meetingId: string }>;

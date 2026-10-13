@@ -1,5 +1,5 @@
 "use client"
-import { ErrorState } from "@/components/error-state"
+import { ErrorState } from "@/frontend/components/error-state"
 
  
 

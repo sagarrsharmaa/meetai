@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next";
 
 import { TRPCReactProvider } from "@/trpc/client";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/frontend/components/ui/sonner";
 
 import "./globals.css";
 

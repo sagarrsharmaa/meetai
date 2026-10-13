@@ -3,10 +3,10 @@ import { cache } from "react";
 import { headers } from "next/headers";
 import { count, eq } from "drizzle-orm";
 
-import { auth } from "@/lib/auth";
-import { db } from "@/db";
-import { agents, meetings } from "@/db/schema";
-import { isPolarConfigured, polarClient } from "@/lib/polar";
+import { auth } from "@/backend/lib/auth";
+import { db } from "@/backend/db";
+import { agents, meetings } from "@/backend/db/schema";
+import { isPolarConfigured, polarClient } from "@/backend/lib/polar";
 import { MAX_FREE_AGENTS, MAX_FREE_MEETINGS } from "@/constants";
 
 export const createTRPCContext = cache(async () => {

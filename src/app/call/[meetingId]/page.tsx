@@ -4,11 +4,11 @@ import { redirect } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import { auth } from "@/lib/auth";
+import { auth } from "@/backend/lib/auth";
 import { getQueryClient, trpc } from "@/trpc/server";
-import { ErrorState } from "@/components/error-state";
-import { LoadingState } from "@/components/loading-state";
-import { CallView } from "@/modules/call/ui/views/call-view";
+import { ErrorState } from "@/frontend/components/error-state";
+import { LoadingState } from "@/frontend/components/loading-state";
+import { CallView } from "@/frontend/modules/call/ui/views/call-view";
 
 interface Props {
   params: Promise<{ meetingId: string }>;

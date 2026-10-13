@@ -67,7 +67,7 @@ Events handled:
 
 ### Inngest (summaries)
 
-The summariser lives in [src/inngest/functions.ts](src/inngest/functions.ts) and
+The summariser lives in [src/backend/inngest/functions.ts](src/backend/inngest/functions.ts) and
 is served from `/api/inngest`. Run the dev server alongside `npm run dev`:
 
 ```bash
@@ -91,25 +91,53 @@ npx inngest-cli@latest dev
 
 ## Project layout
 
+This is a single Next.js app (one deployable, one repo). The work is split by
+folder into **`frontend/`** (client + UI) and **`backend/`** (server), with
+**`trpc/`** as the typed bridge both sides share and **`app/`** holding only
+Next.js routing — App Router requires the routing tree to live in `src/app`, so
+it stays put and its `api/` handlers are thin wrappers that delegate to
+`backend/`.
+
 ```
 src/
-  app/
-    (auth)/          sign-in, sign-up
-    (dashboard)/     home, agents, meetings, upgrade
-    call/[meetingId] the call experience (own layout, no dashboard chrome)
-    api/             auth, trpc, inngest, webhook
-  modules/
-    agents/          schema, procedures, filters, table, dialogs, detail view
-    meetings/        schema, procedures, filters, status views, transcript, chat
-    call/            lobby / active / ended, Stream client wiring
-    premium/         Polar products, subscription, free-usage
-    dashboard/       sidebar, navbar, command palette, user button, trial banner
-    home/            dashboard landing
-  db/                Drizzle schema + client
-  inngest/           background job client + functions
-  lib/               auth, polar, stream clients, avatars, utils
-  trpc/              init (protected + premium procedures), routers, server/client
+  app/                 Next.js App Router — routing only
+    (auth)/            sign-in, sign-up
+    (dashboard)/       home, agents, meetings, upgrade
+    call/[meetingId]   the call experience (own layout, no dashboard chrome)
+    api/               auth, trpc, inngest, webhook (thin handlers → backend)
+
+  frontend/            all client / UI work
+    components/        shared components + shadcn/ui primitives
+    hooks/             use-mobile, use-confirm
+    lib/               client helpers: utils (cn), auth-client, avatar
+    modules/
+      agents/          ui (table, dialogs, forms, detail) + schema, types, filters
+      meetings/        ui (status views, transcript, chat) + schema, types, filters
+      call/            lobby / active / ended, Stream client wiring
+      premium/         pricing cards, upgrade view
+      dashboard/       sidebar, navbar, command palette, user button, trial banner
+      home/            dashboard landing
+      auth/            sign-in / sign-up views
+
+  backend/             all server-side work
+    db/                Drizzle schema + Neon client
+    inngest/           background job client + transcript → summary function
+    lib/               server clients: auth (Better Auth), polar, stream-video, stream-chat
+    modules/
+      agents/server/   agents tRPC procedures
+      meetings/server/ meetings tRPC procedures
+      premium/server/  subscription / products procedures
+
+  trpc/                typed bridge shared by both: init (protected + premium
+                       procedures), routers, server/client
+  constants.ts         shared constants (page sizes, free-tier limits)
 ```
+
+> A few genuinely shared primitives live on one side and are imported by the
+> other: each module's `schema`/`types` (Zod + inferred types) sit under
+> `frontend/` and are consumed by the backend procedures, and `avatar` (a
+> presentation helper) sits under `frontend/lib` and is reused by the webhook.
+> These are client-safe, type-only or pure helpers, so the cross-import is safe.
 
 ## Scripts
 
@@ -120,6 +148,26 @@ npm run lint       # eslint
 npm run db:push    # push schema to the database
 npm run db:studio  # drizzle studio
 ```
+
+## Deployment (Vercel)
+
+The app deploys to Vercel as a standard Next.js project.
+
+1. **Push to GitHub** and import the repo at [vercel.com/new](https://vercel.com/new).
+   Vercel auto-detects Next.js — leave the build settings at their defaults.
+2. **Set environment variables** (same keys as [.env.example](.env.example)).
+   Two of them must point at the deployed URL rather than localhost:
+   * `BETTER_AUTH_URL` → `https://<your-domain>`
+   * `NEXT_PUBLIC_APP_URL` → `https://<your-domain>`
+   `NEXT_PUBLIC_*` values are inlined at build time, so change them and
+   **redeploy** — a restart alone won't pick them up.
+3. **Update OAuth callback URLs** so social login works in production:
+   * GitHub → `https://<your-domain>/api/auth/callback/github`
+   * Google → `https://<your-domain>/api/auth/callback/google`
+4. **Point the Stream webhook** at `https://<your-domain>/api/webhook` and set
+   `INNGEST_EVENT_KEY` / `INNGEST_SIGNING_KEY` for the production summary job.
+
+Pushes to the default branch then trigger automatic deployments.
 
 ## Free tier
 
