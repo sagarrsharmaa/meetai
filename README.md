@@ -169,6 +169,11 @@ The app deploys to Vercel as a standard Next.js project.
 
 Pushes to the default branch then trigger automatic deployments.
 
+> **Install note:** `@polar-sh/better-auth` declares a peer of an older
+> `@polar-sh/sdk` than the one used here. A committed [.npmrc](.npmrc) sets
+> `legacy-peer-deps=true` so clean installs (Vercel) accept the compatible
+> version instead of failing with `ERESOLVE`.
+
 ## Free tier
 
 `premiumProcedure` in [src/trpc/init.ts](src/trpc/init.ts) enforces
